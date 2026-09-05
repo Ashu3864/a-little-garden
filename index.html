@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>A LITTLE GARDEN 🌸</title>
+  
+  <!-- Tailwind CSS v3 with plugins -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Google Fonts for whimsical typography -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet"/>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            garden: {
+              bgLight: '#FFF7FA',
+              bgRose: '#FFF0F5',
+              blush: '#F8DDE7',
+              pink: '#EFB6C8',
+              roseDeep: '#C98FA4',
+              stem: '#94B8A3',
+              stemDark: '#678B75',
+              nightLavender: '#2D2232'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Outfit"', 'sans-serif'],
+            hand: ['"Caveat"', 'cursive']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- BEGIN: Custom Styles -->
+  <style data-purpose="core-animations">
+    @keyframes gentleSway {
+      0%, 100% { transform: rotate(-2.5deg); }
+      50% { transform: rotate(2.5deg); }
+    }
+    @keyframes softFloat {
+      0%, 100% { transform: translateY(0px) rotate(1deg); }
+      50% { transform: translateY(-12px) rotate(-1.5deg); }
+    }
+    @keyframes softBreathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.035); }
+    }
+    @keyframes cloudDriftSlow {
+      0% { transform: translateX(-5%); }
+      50% { transform: translateX(5%); }
+      100% { transform: translateX(-5%); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.65; filter: drop-shadow(0 0 16px rgba(239, 182, 200, 0.45)); }
+      50% { opacity: 0.95; filter: drop-shadow(0 0 32px rgba(248, 221, 231, 0.85)); }
+    }
+    @keyframes wingFlap {
+      0%, 100% { transform: scaleX(1); }
+      50% { transform: scaleX(0.18); }
+    }
+    @keyframes butterflyFly1 {
+      0% { transform: translate(0, 0) rotate(5deg); }
+      25% { transform: translate(60px, -40px) rotate(-8deg); }
+      50% { transform: translate(120px, 15px) rotate(10deg); }
+      75% { transform: translate(70px, 50px) rotate(-4deg); }
+      100% { transform: translate(0, 0) rotate(5deg); }
+    }
+    @keyframes butterflyFly2 {
+      0% { transform: translate(0, 0) rotate(-6deg); }
+      33% { transform: translate(-80px, 30px) rotate(12deg); }
+      66% { transform: translate(-40px, -50px) rotate(-10deg); }
+      100% { transform: translate(0, 0) rotate(-6deg); }
+    }
+    @keyframes bubbleWobble {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-8px) scale(1.05, 0.95); }
+    }
+    @keyframes petalSweepAnim {
+      0% { transform: scale(0) rotate(0deg); opacity: 0; }
+      50% { opacity: 0.9; }
+      100% { transform: scale(25) rotate(180deg); opacity: 0; }
+    }
+
+    /* 2 Bells Swinging & Jingling Animation */
+    @keyframes bellSwingLeft {
+      0%, 100% { transform: rotate(-24deg); }
+      50% { transform: rotate(20deg); }
+    }
+    @keyframes bellSwingRight {
+      0%, 100% { transform: rotate(20deg); }
+      50% { transform: rotate(-24deg); }
+    }
+    .bell-swing-1 { animation: bellSwingLeft 0.35s ease-in-out infinite; transform-origin: top center; }
+    .bell-swing-2 { animation: bellSwingRight 0.35s ease-in-out infinite; transform-origin: top center; }
+
+    /* Watering Can Tilt Animation */
+    @keyframes waterCanTilt {
+      0% { transform: rotate(0deg) translate(0, 0); }
+      25%, 75% { transform: rotate(-42deg) translate(-10px, 6px); }
+      100% { transform: rotate(0deg) translate(0, 0); }
+    }
+    .water-can-anim { animation: waterCanTilt 2.3s ease-in-out forwards; transform-origin: bottom right; }
+
+    /* Water Droplets Falling Animation */
+    @keyframes waterDropFall {
+      0% { transform: translateY(0px) scale(0.6); opacity: 0; }
+      30% { opacity: 0.95; }
+      100% { transform: translateY(42px) scale(1.2); opacity: 0; }
+    }
+    .water-drop-anim { animation: waterDropFall 0.55s ease-in infinite; }
+
+    /* Rose Bloom Animation */
+    @keyframes roseBloomGrow {
+      0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+      60% { transform: scale(1.2) rotate(6deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+    .rose-bloom-anim { animation: roseBloomGrow 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+    .sway-slow { animation: gentleSway 6s ease-in-out infinite; transform-origin: bottom center; }
+    .float-slow { animation: softFloat 5.5s ease-in-out infinite; }
+    .breathe { animation: softBreathe 5s ease-in-out infinite; }
+    .pulse-glow { animation: pulseGlow 4s ease-in-out infinite; }
+    .wing-left, .wing-right { animation: wingFlap 0.22s ease-in-out infinite; transform-origin: center; }
+    .bubble-wobble { animation: bubbleWobble 3.5s ease-in-out infinite; }
+    .butterfly-path-1 { animation: butterflyFly1 14s ease-in-out infinite; }
+    .butterfly-path-2 { animation: butterflyFly2 18s ease-in-out infinite; }
+
+    /* Custom Pink Flower Cursor */
+    * {
+      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23EFB6C8'><circle cx='12' cy='12' r='4' fill='%23C98FA4'/><path d='M12 2a4 4 0 0 0-4 4c0 2 4 6 4 6s4-4 4-6a4 4 0 0 0-4-4zm-10 10a4 4 0 0 0 4 4c2 0 6-4 6-4s-4-4-6-4a4 4 0 0 0-4 4zm10 10a4 4 0 0 0 4-4c0-2-4-6-4-6s-4 4-4 6a4 4 0 0 0 4 4zm10-10a4 4 0 0 0-4-4c-2 0-6 4-6 4s4 4 6 4a4 4 0 0 0 4-4z'/></svg>") 12 12, auto !important;
+    }
+
+    /* Glassmorphism card backdrop */
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.76);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(248, 221, 231, 0.85);
+      box-shadow: 0 8px 32px rgba(201, 143, 164, 0.12);
+    }
+    .glass-bubble {
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.95), rgba(254, 215, 226, 0.45) 60%, rgba(244, 114, 182, 0.3) 100%);
+      backdrop-filter: blur(6px);
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      box-shadow: inset -4px -4px 10px rgba(244, 114, 182, 0.25), 0 8px 24px rgba(239, 182, 200, 0.35);
+    }
+
+    /* Secret sweep transition overlay */
+    .petal-sweep-active {
+      display: block !important;
+      animation: petalSweepAnim 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    ::-webkit-scrollbar { display: none; }
+  </style>
+  <!-- END: Custom Styles -->
+</head>
+<body class="bg-gradient-to-b from-[#FFF0F5] via-[#FFF7FA] to-[#FCE7F0] text-gray-700 font-sans min-h-screen overflow-x-hidden selection:bg-rose-200 selection:text-rose-800 select-none relative">
+
+  <!-- BEGIN: Ambient Audio / Particles Canvas Layer (Always running) -->
+  <div class="fixed inset-0 pointer-events-none z-10" id="canvas-container">
+    <canvas class="w-full h-full block" id="garden-canvas"></canvas>
+  </div>
+  <!-- END: Ambient Audio / Particles Canvas Layer -->
+
+  <!-- Petal sweep transition burst element -->
+  <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-gradient-to-tr from-pink-300 via-rose-300 to-pink-100 pointer-events-none z-50 hidden" id="petal-sweep-fx"></div>
+
+  <!-- BEGIN: Whimsical Sky Landscape & Distant Hills -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <!-- Distant Twinkling Stars -->
+    <div class="absolute top-10 left-[15%] w-1.5 h-1.5 rounded-full bg-amber-200/80 animate-ping"></div>
+    <div class="absolute top-20 left-[35%] w-2 h-2 rounded-full bg-rose-200/90 animate-pulse"></div>
+    <div class="absolute top-12 right-[25%] w-1.5 h-1.5 rounded-full bg-amber-100 animate-ping" style="animation-delay: 1.5s;"></div>
+    <div class="absolute top-32 right-[12%] w-2 h-2 rounded-full bg-pink-300/70 animate-pulse" style="animation-delay: 0.8s;"></div>
+    
+    <!-- Drifting Pastel Clouds -->
+    <div class="absolute top-16 left-6 w-56 opacity-60" style="animation: cloudDriftSlow 24s ease-in-out infinite;">
+      <div class="w-40 h-12 bg-white/75 rounded-full blur-[1px]"></div>
+      <div class="w-24 h-12 bg-white/80 rounded-full -mt-7 ml-10 blur-[1px]"></div>
+    </div>
+    <div class="absolute top-24 right-1/4 w-48 opacity-50" style="animation: cloudDriftSlow 30s ease-in-out infinite reverse;">
+      <div class="w-36 h-10 bg-white/70 rounded-full blur-[1px]"></div>
+      <div class="w-20 h-10 bg-white/75 rounded-full -mt-6 ml-8 blur-[1px]"></div>
+    </div>
+    
+    <!-- Distant Rolling Hills Layer -->
+    <div class="absolute -bottom-24 -left-20 w-[600px] h-[360px] rounded-[50%] bg-gradient-to-t from-[#FADCE6]/60 to-transparent blur-2xl"></div>
+    <div class="absolute -bottom-20 -right-20 w-[700px] h-[400px] rounded-[50%] bg-gradient-to-t from-[#FEE5ED]/70 to-transparent blur-2xl"></div>
+    <div class="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-[#FADCE6]/30 via-transparent to-transparent"></div>
+  </div>
+  <!-- END: Whimsical Sky Landscape & Distant Hills -->
+
+  <!-- BEGIN: Floating Natural Butterflies in Sky -->
+  <div class="fixed top-36 left-[22%] z-20 pointer-events-auto cursor-pointer butterfly-path-1" id="sky-butterfly-1" title="Tap butterfly!">
+    <svg class="w-7 h-7 text-pink-400 hover:scale-125 transition-transform drop-shadow-sm" fill="currentColor" viewbox="0 0 24 24">
+      <path class="wing-left" d="M12 12c-2-4-7-5-9-3-2 3 1 8 5 8 2 0 4-2 4-5z"></path>
+      <path class="wing-right" d="M12 12c2-4 7-5 9-3 2 3-1 8-5 8-2 0-4-2 4-5z"></path>
+      <circle cx="12" cy="12" fill="#678B75" r="1.5"></circle>
+    </svg>
+  </div>
+  <div class="fixed top-48 right-[20%] z-20 pointer-events-auto cursor-pointer butterfly-path-2" id="sky-butterfly-2" title="Tap butterfly!">
+    <svg class="w-8 h-8 text-amber-300 hover:scale-125 transition-transform drop-shadow-sm" fill="currentColor" viewbox="0 0 24 24">
+      <path class="wing-left" d="M12 12c-2-4-7-5-9-3-2 3 1 8 5 8 2 0 4-2 4-5z"></path>
+      <path class="wing-right" d="M12 12c2-4 7-5 9-3 2 3-1 8-5 8-2 0-4-2 4-5z"></path>
+      <circle cx="12" cy="12" fill="#EAB308" r="1.5"></circle>
+    </svg>
+  </div>
+  <!-- END: Floating Natural Butterflies in Sky -->
+
+  <!-- BEGIN: HUD Navigation / Tracker Bar -->
+  <header class="fixed top-4 left-0 right-0 z-40 px-4 sm:px-8 max-w-6xl mx-auto flex items-center justify-between pointer-events-auto">
+    <!-- Garden Emblem -->
+    <div class="flex items-center gap-3">
+      <div class="glass-pill px-4 py-2 rounded-full flex items-center gap-2.5 shadow-sm hover:scale-102 transition-transform">
+        <span class="text-lg">🌿</span>
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-widest text-garden-roseDeep font-sans block leading-none">A LITTLE GARDEN 🌸</span>
+          <span class="text-xs font-hand text-pink-600 font-bold leading-tight">I made you a little place</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Controls: Discovery Tracker + Sound & Secret Garden Gate -->
+    <div class="flex items-center gap-2.5 sm:gap-3">
+      <!-- Discovery tracker badge -->
+      <div class="glass-pill px-3.5 sm:px-4 py-2 rounded-full flex items-center gap-2 text-sm font-medium text-garden-roseDeep" id="discovery-pill" title="Garden Secrets Found!">
+        <span class="animate-bounce text-base">🌸</span>
+        <span class="text-xs uppercase tracking-wider font-semibold text-gray-500 hidden sm:inline">Discovered</span>
+        <span class="font-bold text-sm sm:text-base text-pink-600"><span id="count">0</span>/7</span>
+      </div>
+      
+      <!-- Sound Toggle Pill with Synthesizer -->
+      <button class="glass-pill w-10 h-10 rounded-full flex items-center justify-center text-gray-600 hover:text-pink-600 transition-all active:scale-90" id="sound-toggle-btn" title="Toggle Magical Chimes">
+        <svg class="w-5 h-5" fill="none" id="sound-icon-on" stroke="currentColor" viewbox="0 0 24 24">
+          <path d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+        </svg>
+      </button>
+      
+      <!-- Secret Garden Gate Shortcut Trigger -->
+      <button class="glass-pill px-3.5 sm:px-4 py-2 rounded-full text-xs font-semibold text-garden-roseDeep flex items-center gap-1.5 hover:bg-rose-50 hover:scale-105 active:scale-95 transition-all shadow-sm border border-rose-200" id="secret-garden-direct-btn">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-pink-500"></span>
+        </span>
+        <span>Secret Garden</span>
+        <span class="text-xs">✨</span>
+      </button>
+    </div>
+  </header>
+  <!-- END: HUD Navigation / Tracker Bar -->
+
+  <!-- BEGIN: Toast Floating Notification -->
+  <div class="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 transform -translate-y-2" id="garden-toast">
+    <div class="glass-pill px-5 py-2.5 rounded-full shadow-lg border border-pink-200 flex items-center gap-2.5 text-garden-roseDeep font-medium text-sm">
+      <span class="text-lg" id="toast-icon">✨</span>
+      <span id="toast-text">welcome to our place!</span>
+    </div>
+  </div>
+  <!-- END: Toast Floating Notification -->
+
+  <!-- BEGIN: Main Interactive Parallax Landscape -->
+  <main class="relative w-full min-h-screen pt-24 sm:pt-28 pb-32 px-4 sm:px-8 max-w-7xl mx-auto flex flex-col items-center justify-start z-20" id="scene-root">
+    
+    <!-- BEGIN: Title and Wholesome Bestie Greeting -->
+    <div class="text-center max-w-2xl mx-auto mt-2 mb-8 transition-transform duration-300" data-parallax="0.02">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-garden-blush text-xs text-garden-roseDeep uppercase tracking-widest font-semibold mb-2.5 shadow-sm">
+        <span>for my absolute best friend</span>
+        <span>🌸</span>
+      </div>
+      <h1 class="font-serif text-4xl sm:text-6xl text-gray-800 font-semibold tracking-tight mb-2">
+        A Little Garden
+      </h1>
+      <p class="text-lg sm:text-2xl font-hand text-pink-600 font-bold tracking-wide">
+        "I made you a little place to exist when everything is loud."
+      </p>
+      <p class="text-xs text-gray-400 mt-1 font-sans">
+        (tap whatever catches your eye... flowers, photos, bubbles, pond &amp; butterflies! ✨)
+      </p>
+    </div>
+    <!-- END: Title and Wholesome Bestie Greeting -->
+
+    <!-- Clickable Dreamy Pastel Moon -->
+    <div class="absolute top-16 right-6 sm:right-20 z-20 cursor-pointer group" data-parallax="0.04" id="interactive-moon" title="Give the moon a poke!">
+      <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-[#FFF3D1] to-[#FFE2E2] shadow-xl shadow-amber-100/70 group-hover:scale-110 transition-transform duration-500 flex items-center justify-center">
+        <div class="w-16 h-16 rounded-full bg-[#FFFBF0]/60 blur-[2px]"></div>
+        <span class="absolute text-2xl group-hover:rotate-12 transition-transform">🌙</span>
+        <div class="absolute inset-0 rounded-full border border-white/60 animate-ping opacity-25"></div>
+      </div>
+      <span class="block text-center text-[10px] uppercase font-bold tracking-widest text-garden-roseDeep mt-1 opacity-70 group-hover:opacity-100">
+        tap moon
+      </span>
+    </div>
+
+    <!-- BEGIN: Garden Arrangement Center Grid -->
+    <div class="w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center mt-2">
+      
+      <!-- LEFT COLUMN: Polaroid Meadow Photo & Swaying Buds -->
+      <div class="md:col-span-4 flex flex-col items-center md:items-start space-y-5" data-parallax="0.06">
+        <!-- Enchanted Polaroid Memory Card #1 -->
+        <div class="relative group cursor-pointer transform -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 shadow-xl hover:shadow-2xl rounded-sm p-3.5 bg-white border border-pink-100 w-full max-w-[340px] sm:max-w-[380px] sway-slow" data-discovery-id="polaroid-1" id="polaroid-meadow">
+          <!-- Washi Floral Tape Graphic -->
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 w-32 h-7 bg-pink-100/95 rotate-1 border-l border-r border-dashed border-pink-300 shadow-sm z-30 pointer-events-none flex items-center justify-center">
+            <span class="text-[10px] tracking-widest text-rose-500 uppercase font-sans font-medium">🌸 floral washi</span>
+          </div>
+          <!-- Polaroid Photo Frame -->
+          <div class="overflow-hidden rounded-sm bg-stone-100 aspect-[16/9] relative">
+            <img alt="Cute aesthetic pastel Polaroid photo in sunny wildflower meadow" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="assets/photo_1.jpg"/>
+            <div class="absolute inset-0 bg-pink-400/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div class="pt-3 pb-0.5 text-center font-hand text-2xl text-gray-800 tracking-wide font-bold">
+            Summer in Bloom 🌸
+          </div>
+          <div class="text-[11px] text-pink-500 text-center font-sans tracking-wide">
+            just her, making summer prettier 🌸 (tap photo)
+          </div>
+        </div>
+
+        <!-- Interactive Plant Pot: "Sage Wildflowers" -->
+        <div class="glass-pill p-3.5 rounded-2xl flex items-center gap-3 cursor-pointer hover:bg-white hover:scale-102 transition-all shadow-sm group" data-discovery-id="pot-1" id="clickable-pot-1">
+          <div class="w-11 h-11 rounded-xl bg-rose-100 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+            🪴
+          </div>
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-garden-roseDeep">Sage Wildflowers</h4>
+            <p class="text-xs text-gray-500">water the seedling 🌱</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CENTER COLUMN: Grand Botanical Masterpiece Rose -->
+      <div class="md:col-span-4 flex flex-col items-center justify-center relative py-2" data-parallax="0.09">
+        <!-- Whimsical Fairy Light Rings behind Rose -->
+        <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full border-2 border-pink-200/60 pulse-glow pointer-events-none -z-0"></div>
+        <div class="absolute w-64 h-64 rounded-full bg-gradient-to-br from-rose-100/60 to-pink-200/30 blur-3xl -z-0"></div>
+        
+        <!-- The Main Interactive Rose Centerpiece -->
+        <div class="relative z-10 cursor-pointer group flex flex-col items-center" data-discovery-id="grand-rose" id="grand-botanical-rose" title="Bloom the Grand White Rose!">
+          <div class="relative w-64 h-64 sm:w-80 sm:h-80 transition-transform duration-700 group-hover:scale-108 breathe">
+            <!-- Dewdrops & Rose Glow -->
+            <img alt="Botanical watercolor illustration of exquisite white rose with subtle pink blush" class="w-full h-full object-contain filter drop-shadow-xl group-hover:drop-shadow-2xl transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv3i82QguN4qCy9ct-ccFLPwPXYmUr3TmsFb3aCYhs6VFBPXLWKBkAlauBfD7FPKmpNzLYZkxMwYrgwNpoBUW4Z9-BlHe0JV66M3J8n-RG-So4Eqe5WDsiHTh-GV0j2L4qTluFncTHwSxdtAuPRn0BVxUPbrLXOoRLipDiWtcyqsoXeDBISWb3KxOVjJlF1hc1puHziwOjJMjbcngsyR_OlKpkPzOeEP234jG7JBmEuli27QPTbQhQ"/>
+            <!-- Orbiting Dewdrop Sparkle Accents -->
+            <div class="absolute top-8 right-10 w-3 h-3 rounded-full bg-white shadow-md shadow-pink-300 animate-ping opacity-80"></div>
+            <div class="absolute bottom-16 left-10 w-2.5 h-2.5 rounded-full bg-pink-200 shadow-sm animate-pulse"></div>
+          </div>
+          <!-- Rose badge / lore button -->
+          <div class="mt-2 glass-pill px-5 py-2 rounded-full text-center group-hover:bg-white group-hover:scale-105 transition-all shadow-md border border-rose-200">
+            <span class="text-xs uppercase tracking-widest text-garden-roseDeep font-bold flex items-center gap-1.5 justify-center">
+              <span>🌸 Grand Botanical White Rose</span>
+            </span>
+            <span class="text-[11px] text-gray-500 italic font-serif">"subtle pink blush, pure laughs &amp; sweet memories"</span>
+          </div>
+        </div>
+
+        <!-- Floating Pond with Water Lily under Centerpiece -->
+        <div class="relative mt-8 w-64 h-20 rounded-[50%] bg-gradient-to-r from-pink-100/80 via-rose-100/60 to-emerald-100/50 border border-white shadow-inner flex items-center justify-center cursor-pointer group hover:scale-105 transition-transform" data-discovery-id="pond-secret" id="pond-sanctuary" title="Ripple the lotus pond">
+          <div class="absolute w-48 h-12 rounded-[50%] border border-rose-300/40 animate-ping opacity-25 pointer-events-none"></div>
+          <span class="text-sm font-hand text-gray-700 group-hover:scale-110 transition-transform flex items-center gap-1.5">
+            <span>🪷</span>
+            <span class="font-bold">ripple the lotus pond</span>
+            <span>🪷</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Cafe Matcha Photo & Whispering Bell Bush -->
+      <div class="md:col-span-4 flex flex-col items-center md:items-end space-y-5" data-parallax="0.06">
+        <!-- Enchanted Sunlit Botanical Memory Photo #2 -->
+        <div class="relative group cursor-pointer transform rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-500 shadow-xl hover:shadow-2xl rounded-sm p-3.5 bg-white border border-pink-100 w-full max-w-[340px] sm:max-w-[380px] float-slow" data-discovery-id="polaroid-2" id="polaroid-cafe">
+          <!-- Washi Floral Tape Graphic -->
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 w-32 h-7 bg-amber-100/95 -rotate-1 border-l border-r border-dashed border-amber-300 shadow-sm z-30 pointer-events-none flex items-center justify-center">
+            <span class="text-[10px] tracking-widest text-amber-800 uppercase font-sans font-medium">✨ festive glow</span>
+          </div>
+          <!-- Photo Container with soft floral border vibe -->
+          <div class="overflow-hidden rounded-sm bg-stone-100 aspect-[16/9] relative border border-amber-50">
+            <img alt="Aesthetic photo celebrating Kumar Purnima" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="assets/photo_2.jpg"/>
+            <div class="absolute inset-0 bg-pink-400/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div class="pt-3 pb-0.5 text-center font-hand text-2xl text-gray-800 tracking-wide font-bold">
+            Kumar Purnima ✨
+          </div>
+          <div class="text-[11px] text-pink-500 text-center font-sans tracking-wide">
+            okayyy, somebody understood the assignment (tap photo)
+          </div>
+        </div>
+
+        <!-- Interactive Whimsical Bell Shrub -->
+        <div class="glass-pill p-3.5 rounded-2xl flex items-center gap-3 cursor-pointer hover:bg-white hover:scale-102 transition-all shadow-sm group" data-discovery-id="bell-shrub" id="clickable-bellshrub">
+          <div class="w-11 h-11 rounded-xl bg-pink-100 flex items-center justify-center text-xl group-hover:rotate-12 transition-transform">
+            🔔
+          </div>
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-garden-roseDeep">Garden Chime Shrub</h4>
+            <p class="text-xs text-gray-500">ring the blossom chime ✨</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- END: Garden Arrangement Center Grid -->
+
+    <!-- BEGIN: Interactive Garden Floor Elements & Floating Wobbly Bubbles -->
+    <div class="w-full mt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-6 z-30">
+      <!-- Floating Translucent Wobble Bubble 1 -->
+      <button class="garden-bubble glass-bubble w-28 h-12 rounded-full flex items-center justify-center gap-2 hover:scale-110 active:scale-75 transition-all text-xs font-semibold text-rose-800 bubble-wobble" data-bubble-type="compliment-1" data-discovery-id="bubble-1" title="Poke me!">
+        <span class="text-base">🫧</span>
+        <span>poke me!</span>
+      </button>
+      
+      <!-- Floating Translucent Wobble Bubble 2 -->
+      <button class="garden-bubble glass-bubble w-28 h-12 rounded-full flex items-center justify-center gap-2 hover:scale-110 active:scale-75 transition-all text-xs font-semibold text-rose-800 bubble-wobble" data-bubble-type="compliment-2" data-discovery-id="bubble-2" style="animation-delay: 1.2s;" title="Pop bubble!">
+        <span class="text-base">🫧</span>
+        <span>pop bubble</span>
+      </button>
+      
+      <!-- Golden-Pink Butterfly hovering near Secret Garden Gate -->
+      <button class="glass-pill px-4 py-2.5 rounded-full flex items-center gap-2.5 border-rose-300 text-xs font-semibold text-pink-600 hover:bg-rose-50 hover:scale-105 active:scale-95 transition-all shadow-sm group" data-discovery-id="secret-butterfly" id="rare-butterfly-btn" title="Follow golden-pink butterfly">
+        <svg class="w-5 h-5 text-amber-400 group-hover:scale-125 transition-transform" fill="currentColor" viewbox="0 0 24 24">
+          <path class="wing-left" d="M12 12c-2-4-7-5-9-3-2 3 1 8 5 8 2 0 4-2 4-5z"></path>
+          <path class="wing-right" d="M12 12c2-4 7-5 9-3 2 3-1 8-5 8-2 0-4-2 4-5z"></path>
+          <circle cx="12" cy="12" fill="#EAB308" r="1.5"></circle>
+        </svg>
+        <span>Follow Golden Butterfly 🦋</span>
+      </button>
+      
+      <!-- Plant a Flower Action -->
+      <button class="glass-pill px-4 py-2.5 rounded-full flex items-center gap-2 text-xs font-medium text-garden-stemDark hover:bg-emerald-50 hover:scale-105 active:scale-95 transition-all" id="plant-flower-btn" title="Plant baby sprout">
+        <span>🌱</span>
+        <span>Plant baby sprout</span>
+      </button>
+    </div>
+    <!-- END: Interactive Garden Floor Elements & Floating Wobbly Bubbles -->
+
+  </main>
+  <!-- END: Main Interactive Parallax Landscape -->
+
+  <!-- BEGIN: Floating Temporary Interactive Overlays (No separate window) -->
+  <div id="garden-dynamic-overlays" class="fixed inset-0 pointer-events-none z-50 flex items-center justify-center">
+    
+    <!-- 1. Plant Baby Sprout Rose Blooming Overlay -->
+    <div id="sprout-anim-overlay" class="opacity-0 transition-all duration-500 transform scale-75 pointer-events-none flex flex-col items-center justify-center p-4">
+      <div class="glass-pill p-6 sm:p-8 rounded-3xl border-2 border-pink-200 shadow-2xl flex flex-col items-center text-center max-w-xs sm:max-w-sm bg-white/95 backdrop-blur-xl relative">
+        <div class="relative w-40 h-44 flex items-end justify-center mb-2">
+          <!-- Soil Mound -->
+          <div class="w-32 h-6 bg-gradient-to-r from-amber-900/40 via-amber-800/60 to-amber-900/40 rounded-full shadow-inner z-10"></div>
+          
+          <!-- Seed Drop Phase -->
+          <div id="sprout-seed-el" class="absolute top-2 w-4 h-4 rounded-full bg-amber-700 shadow-sm border border-amber-900 opacity-0 transform -translate-y-4 transition-all duration-700"></div>
+          
+          <!-- Stem & Leaves Growth -->
+          <div id="sprout-stem-el" class="absolute bottom-4 flex flex-col items-center transition-all duration-1000 origin-bottom scale-y-0">
+            <div class="relative w-16 h-14">
+              <div class="absolute left-0 bottom-3 w-6 h-3 bg-emerald-400 rounded-full -rotate-30 origin-right shadow-sm"></div>
+              <div class="absolute right-0 bottom-3 w-6 h-3 bg-emerald-400 rounded-full rotate-30 origin-left shadow-sm"></div>
+              <div class="w-2 h-14 bg-emerald-500 mx-auto rounded-full shadow-sm"></div>
+            </div>
+          </div>
+
+          <!-- Rose Bud to Full Blooming Flower -->
+          <div id="sprout-rose-el" class="absolute bottom-16 w-24 h-24 transform scale-0 opacity-0 flex items-center justify-center transition-all duration-1000">
+            <img alt="Blooming pink rose" class="w-full h-full object-contain filter drop-shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv3i82QguN4qCy9ct-ccFLPwPXYmUr3TmsFb3aCYhs6VFBPXLWKBkAlauBfD7FPKmpNzLYZkxMwYrgwNpoBUW4Z9-BlHe0JV66M3J8n-RG-So4Eqe5WDsiHTh-GV0j2L4qTluFncTHwSxdtAuPRn0BVxUPbrLXOoRLipDiWtcyqsoXeDBISWb3KxOVjJlF1hc1puHziwOjJMjbcngsyR_OlKpkPzOeEP234jG7JBmEuli27QPTbQhQ"/>
+          </div>
+        </div>
+
+        <!-- Sweet Message Banner -->
+        <div id="sprout-message-el" class="opacity-0 transform translate-y-3 transition-all duration-700">
+          <div class="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-gradient-to-r from-pink-100 via-rose-100 to-pink-100 border border-pink-300 text-pink-600 font-hand text-2xl font-bold tracking-wide shadow-md">
+            <span>This is for you sweetheart</span>
+            <span>🌸💕</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Water the Seedling Watering Can Overlay -->
+    <div id="watering-anim-overlay" class="opacity-0 transition-all duration-500 transform scale-75 pointer-events-none flex flex-col items-center justify-center p-4">
+      <div class="glass-pill p-6 sm:p-7 rounded-3xl border-2 border-emerald-200 shadow-2xl flex flex-col items-center text-center bg-white/95 backdrop-blur-xl">
+        <div class="relative w-48 h-40 flex items-center justify-center">
+          <!-- Watering Can -->
+          <div id="watering-can-el" class="absolute top-1 right-4 text-5xl origin-bottom-right">
+            🫖
+          </div>
+          <!-- Animated Water Drops -->
+          <div id="watering-drops-el" class="absolute top-16 left-16 flex flex-col gap-1.5 opacity-0 transition-opacity">
+            <span class="text-sm text-cyan-500 water-drop-anim">💧</span>
+            <span class="text-sm text-cyan-400 water-drop-anim" style="animation-delay: 0.18s;">💧</span>
+            <span class="text-sm text-cyan-500 water-drop-anim" style="animation-delay: 0.36s;">💧</span>
+          </div>
+          <!-- Happy Pot with growing seedling -->
+          <div class="absolute bottom-2 left-12 flex flex-col items-center">
+            <span id="watered-sprout-el" class="text-3xl transition-all duration-700 transform scale-90">🌱</span>
+            <span class="text-4xl">🪴</span>
+          </div>
+        </div>
+        <div class="mt-2 text-sm font-hand text-emerald-700 font-bold text-xl">
+          seedling freshly watered &amp; happy! 💧🌱✨
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Chimes 2 Bells Jingling Overlay -->
+    <div id="chimes-anim-overlay" class="opacity-0 transition-all duration-500 transform scale-75 pointer-events-none flex flex-col items-center justify-center p-4">
+      <div class="glass-pill p-6 sm:p-8 rounded-3xl border-2 border-amber-200 shadow-2xl flex flex-col items-center text-center bg-white/95 backdrop-blur-xl">
+        <!-- 2 Hanging Bells that Swing & Jingle -->
+        <div class="relative w-40 h-32 flex items-center justify-center gap-5">
+          <!-- Ribbon bar -->
+          <div class="absolute top-3 inset-x-3 h-2 bg-gradient-to-r from-pink-300 via-amber-300 to-pink-300 rounded-full shadow-sm"></div>
+          
+          <!-- Bell 1 -->
+          <div class="bell-swing-1 text-5xl transform origin-top drop-shadow-md">
+            🔔
+          </div>
+          <!-- Bell 2 -->
+          <div class="bell-swing-2 text-5xl transform origin-top drop-shadow-md">
+            🔔
+          </div>
+
+          <!-- Sparkle note accents -->
+          <div class="absolute top-1 right-2 text-xl text-amber-400 animate-ping">✨</div>
+          <div class="absolute bottom-1 left-2 text-base text-pink-400 animate-bounce">🎵</div>
+          <div class="absolute bottom-0 right-2 text-base text-rose-400 animate-pulse">🎶</div>
+        </div>
+        <div class="mt-2 text-sm font-hand text-garden-roseDeep font-bold text-2xl">
+          *sweet blossom bells ringing* 🔔🌸✨
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- END: Floating Temporary Interactive Overlays -->
+
+  <!-- BEGIN: Modal - Photo Memory Spotlight -->
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="memory-modal">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border border-pink-100 shadow-2xl relative transform scale-95 transition-transform duration-300" id="modal-card">
+      <button class="absolute top-4 right-4 w-9 h-9 rounded-full bg-stone-100 text-gray-500 hover:text-gray-800 flex items-center justify-center" id="close-modal-btn">
+        ✕
+      </button>
+      <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-inner mb-4 bg-rose-50">
+        <img alt="Spotlight Memory" class="w-full h-full object-cover" id="modal-image" src=""/>
+      </div>
+      <div class="text-center">
+        <span class="text-xs uppercase tracking-widest text-pink-500 font-bold" id="modal-tag">MEMORABLE MOMENT</span>
+        <h3 class="font-serif text-2xl text-gray-800 font-bold mt-1" id="modal-title">Summer Laughs</h3>
+        <p class="font-hand text-2xl text-pink-600 mt-2" id="modal-quote">"you make ordinary afternoons feel like pure art"</p>
+        <div class="mt-5 flex justify-center gap-3">
+          <button class="px-5 py-2 rounded-full bg-rose-50 border border-pink-200 text-pink-700 text-xs font-semibold hover:bg-rose-100 transition-colors flex items-center gap-1.5" id="love-memory-btn">
+            <span>Send Bestie Sparkle</span>
+            <span>✨</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END: Modal - Photo Memory Spotlight -->
+
+  <!-- BEGIN: Modal - Secret Sanctuary Master Vault -->
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-rose-950/60 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-500" id="secret-garden-modal">
+    <div class="bg-gradient-to-b from-[#FFFDFE] to-[#FFF0F5] rounded-3xl p-6 sm:p-10 max-w-xl w-full border-2 border-pink-200 shadow-2xl relative text-center transform scale-90 transition-transform duration-500">
+      <!-- Close Button -->
+      <button class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/80 border border-pink-100 text-gray-500 hover:text-gray-800 flex items-center justify-center shadow-sm" id="close-secret-btn">
+        ✕
+      </button>
+      <div class="inline-flex items-center gap-1 px-4 py-1.5 rounded-full bg-pink-100 text-garden-roseDeep text-xs font-bold uppercase tracking-widest mb-4">
+        <span>👑 BESTIE SANCTUARY UNLOCKED</span>
+      </div>
+      
+      <!-- Big Crown Rose -->
+      <div class="w-44 h-44 mx-auto relative mb-3">
+        <img alt="Botanical rose centerpiece" class="w-full h-full object-contain filter drop-shadow-xl animate-bounce duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv3i82QguN4qCy9ct-ccFLPwPXYmUr3TmsFb3aCYhs6VFBPXLWKBkAlauBfD7FPKmpNzLYZkxMwYrgwNpoBUW4Z9-BlHe0JV66M3J8n-RG-So4Eqe5WDsiHTh-GV0j2L4qTluFncTHwSxdtAuPRn0BVxUPbrLXOoRLipDiWtcyqsoXeDBISWb3KxOVjJlF1hc1puHziwOjJMjbcngsyR_OlKpkPzOeEP234jG7JBmEuli27QPTbQhQ"/>
+        <div class="absolute inset-0 rounded-full bg-pink-300/20 blur-xl -z-10"></div>
+      </div>
+      
+      <h2 class="font-serif text-3xl sm:text-4xl text-gray-800 font-bold mb-3">
+        "you found the whole garden 😭"
+      </h2>
+      <p class="font-sans text-gray-600 text-sm sm:text-base leading-relaxed mb-4 px-2">
+        thank you for exploring my little world. you're genuinely the sweetest, funniest, most comforting friend anyone could ever ask for on this earth. you're the greatest bestie ever 🌸
+      </p>
+      <div class="font-hand text-2xl text-pink-600 font-bold mb-6">
+        i love you so much bestie 🍵🌸💕
+      </div>
+      <button class="px-8 py-3 rounded-full bg-gradient-to-r from-pink-400 to-rose-400 text-white font-semibold shadow-lg shadow-pink-300 hover:scale-105 active:scale-95 transition-all text-sm flex items-center justify-center gap-2 mx-auto" id="confetti-burst-btn">
+        <span>Bloom Sparkle Shower!</span>
+        <span>💐✨</span>
+      </button>
+    </div>
+  </div>
+  <!-- END: Modal - Secret Sanctuary Master Vault -->
+
+  <!-- BEGIN: Web Audio Synthesis Engine (Individual custom sounds for each button) -->
+  <script data-purpose="audio-engine">
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    let soundMuted = false;
+
+    // 1. General Harmonic Chime Chord
+    function playChimeChord(freqs = [523.25, 659.25, 783.99, 1046.50]) {
+      if (soundMuted) return;
+      initAudio();
+      const now = audioCtx.currentTime;
+
+      freqs.forEach((f, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(f, now + i * 0.07);
+
+        gain.gain.setValueAtTime(0, now + i * 0.07);
+        gain.gain.linearRampToValueAtTime(0.08, now + i * 0.07 + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.07 + 1.5);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(now + i * 0.07);
+        osc.stop(now + i * 0.07 + 1.6);
+      });
+    }
+
+    // 2. "Poke Me" Custom Sound: Cute squishy/boop pitch wobble
+    function playPokeSound() {
+      if (soundMuted) return;
+      initAudio();
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(680, now + 0.05);
+      osc.frequency.exponentialRampToValueAtTime(360, now + 0.12);
+
+      gain.gain.setValueAtTime(0.18, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.17);
+    }
+
+    // 3. "Pop Bubble" Custom Sound: Crisp, resonant water bubble pop
+    function playBubblePopSound() {
+      if (soundMuted) return;
+      initAudio();
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(520, now);
+      osc.frequency.exponentialRampToValueAtTime(1600, now + 0.035);
+      osc.frequency.exponentialRampToValueAtTime(300, now + 0.075);
+
+      gain.gain.setValueAtTime(0.22, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.085);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.09);
+    }
+
+    // 4. "Garden Chimes" Custom Sound: Silvery dual-bell jingle overtones
+    function playBellsJingleSound() {
+      if (soundMuted) return;
+      initAudio();
+      const now = audioCtx.currentTime;
+      const bellFreqs = [1760, 2093, 2637, 3135.96, 3520];
+      
+      bellFreqs.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const t = now + idx * 0.05;
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, t);
+
+        gain.gain.setValueAtTime(0, t);
+        gain.gain.linearRampToValueAtTime(0.12, t + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + 1.2);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(t);
+        osc.stop(t + 1.3);
+      });
+    }
+
+    // 5. "Water The Seedling" Custom Sound: Gentle streaming water trickles & droplet splashes
+    function playWateringSound() {
+      if (soundMuted) return;
+      initAudio();
+      const now = audioCtx.currentTime;
+      const drops = [920, 1200, 1050, 1380, 980, 1520, 1150, 1400];
+
+      drops.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const t = now + idx * 0.08;
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, t);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.45, t + 0.035);
+
+        gain.gain.setValueAtTime(0.09, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.07);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(t);
+        osc.stop(t + 0.075);
+      });
+    }
+
+    // 6. "Plant Baby Sprout" Custom Sound: Sweet earthy growth chords & blooming harp arpeggio
+    function playPlantSproutSound() {
+      if (soundMuted) return;
+      initAudio();
+      const now = audioCtx.currentTime;
+      const chords = [392.00, 493.88, 587.33, 659.25, 783.99, 987.77, 1174.66, 1318.51];
+
+      chords.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const t = now + idx * 0.1;
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, t);
+
+        gain.gain.setValueAtTime(0, t);
+        gain.gain.linearRampToValueAtTime(0.12, t + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + 1.4);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(t);
+        osc.stop(t + 1.5);
+      });
+    }
+
+    // 7. "Follow Golden Butterfly" Custom Sound: Fairy sparkle wing flutter & shimmering chimes
+    function playGoldenButterflySound() {
+      if (soundMuted) return;
+      initAudio();
+      const now = audioCtx.currentTime;
+      const fairyChords = [880, 1046.50, 1318.51, 1567.98, 1760, 2093, 2637];
+
+      fairyChords.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const t = now + idx * 0.06;
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, t);
+        osc.frequency.linearRampToValueAtTime(freq * 1.08, t + 0.08);
+
+        gain.gain.setValueAtTime(0, t);
+        gain.gain.linearRampToValueAtTime(0.09, t + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + 1.1);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(t);
+        osc.stop(t + 1.2);
+      });
+    }
+
+    // Toggle sound listener
+    const soundToggle = document.getElementById('sound-toggle-btn');
+    soundToggle.addEventListener('click', () => {
+      initAudio();
+      soundMuted = !soundMuted;
+      soundToggle.classList.toggle('opacity-40', soundMuted);
+      showToast(soundMuted ? "chimes muted 🔇" : "chimes activated 🔔🌸");
+    });
+  </script>
+  <!-- END: Web Audio Synthesis Engine -->
+
+  <!-- BEGIN: Canvas Particle Physics Engine (Petals + Fireflies) -->
+  <script data-purpose="canvas-particle-physics">
+    const canvas = document.getElementById('garden-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    // Falling curved rose petals
+    class Petal {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = -20;
+        this.size = Math.random() * 9 + 8;
+        this.speedY = Math.random() * 0.9 + 0.5;
+        this.speedX = Math.random() * 1.2 - 0.4;
+        this.angle = Math.random() * 360;
+        this.spin = (Math.random() - 0.5) * 1.6;
+        this.color = Math.random() > 0.35 ? '#FDCEDF' : '#FFFFFF';
+        this.alpha = Math.random() * 0.6 + 0.35;
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += Math.sin(this.y * 0.015) + this.speedX;
+        this.angle += this.spin;
+        if (this.y > height + 20) this.reset();
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.angle * Math.PI) / 180);
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        
+        // Teardrop curved rose petal
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(this.size, -this.size * 0.5, this.size, this.size);
+        ctx.quadraticCurveTo(0, this.size * 1.2, 0, 0);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // Glowing Fireflies
+    class Firefly {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.radius = Math.random() * 2 + 1;
+        this.angle = Math.random() * Math.PI * 2;
+        this.speed = Math.random() * 0.4 + 0.2;
+        this.glow = 0;
+      }
+      update() {
+        this.angle += 0.02;
+        this.x += Math.cos(this.angle) * this.speed;
+        this.y += Math.sin(this.angle * 0.8) * this.speed;
+        this.glow = (Math.sin(this.angle * 2) + 1) / 2;
+
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+      }
+      draw() {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 235, 175, ${this.glow * 0.8 + 0.2})`;
+        ctx.shadowColor = '#FFEAA7';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // Sparkle burst particles
+    class Sparkle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 6;
+        this.vy = (Math.random() - 0.5) * 6;
+        this.life = 1;
+        this.decay = Math.random() * 0.03 + 0.02;
+        this.color = Math.random() > 0.5 ? '#F8BBD0' : '#FFF9C4';
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.life -= this.decay;
+      }
+      draw() {
+        if (this.life <= 0) return;
+        ctx.save();
+        ctx.globalAlpha = this.life;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    const petals = Array.from({ length: 35 }, () => new Petal());
+    const fireflies = Array.from({ length: 22 }, () => new Firefly());
+    let sparkles = [];
+
+    function triggerSparkleBurst(x, y, count = 20) {
+      for (let i = 0; i < count; i++) {
+        sparkles.push(new Sparkle(x, y));
+      }
+    }
+
+    function animateEngine() {
+      ctx.clearRect(0, 0, width, height);
+
+      petals.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      fireflies.forEach(f => {
+        f.update();
+        f.draw();
+      });
+
+      sparkles.forEach(s => {
+        s.update();
+        s.draw();
+      });
+      sparkles = sparkles.filter(s => s.life > 0);
+
+      requestAnimationFrame(animateEngine);
+    }
+
+    animateEngine();
+  </script>
+  <!-- END: Canvas Particle Physics Engine -->
+
+  <!-- BEGIN: Interactions, Overlay Animations & Modals -->
+  <script data-purpose="garden-interactions">
+    const discoveredItems = new Set();
+    const totalSecrets = 7;
+    const countDisplay = document.getElementById('count');
+
+    function markDiscovered(id, toastMsg) {
+      if (!discoveredItems.has(id)) {
+        discoveredItems.add(id);
+        countDisplay.textContent = discoveredItems.size;
+        playChimeChord([587.33, 739.99, 880.00, 1174.66]);
+
+        if (discoveredItems.size >= totalSecrets) {
+          setTimeout(() => {
+            showToast("🌸 YOU DISCOVERED EVERY SECRET! Opening Sanctuary...", "👑");
+            setTimeout(triggerSecretGateSequence, 1200);
+          }, 800);
+        }
+      }
+      if (toastMsg) {
+        showToast(toastMsg);
+      }
+    }
+
+    // Toast manager
+    const toast = document.getElementById('garden-toast');
+    const toastText = document.getElementById('toast-text');
+    let toastTimeout = null;
+
+    function showToast(message, icon = "🌸") {
+      document.getElementById('toast-icon').textContent = icon;
+      toastText.textContent = message;
+      toast.classList.remove('opacity-0', '-translate-y-2');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', '-translate-y-2');
+      }, 2800);
+    }
+
+    // Global cursor parallax response
+    document.addEventListener('mousemove', (e) => {
+      const { clientX, clientY } = e;
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      const moveX = (clientX - centerX);
+      const moveY = (clientY - centerY);
+
+      document.querySelectorAll('[data-parallax]').forEach(el => {
+        const factor = parseFloat(el.getAttribute('data-parallax')) || 0.04;
+        el.style.transform = `translate3d(${moveX * factor}px, ${moveY * factor}px, 0)`;
+      });
+    });
+
+    // =========================================================================
+    // OVERLAY ANIMATIONS SYSTEM (Planting Sprout, Watering Can, Bells Chimes)
+    // =========================================================================
+
+    // 1. Sprout Growth & Rose Blooming Overlay Animation
+    let sproutTimeout = null;
+    function triggerSproutBloomAnimation() {
+      const overlay = document.getElementById('sprout-anim-overlay');
+      const seed = document.getElementById('sprout-seed-el');
+      const stem = document.getElementById('sprout-stem-el');
+      const flower = document.getElementById('sprout-rose-el');
+      const message = document.getElementById('sprout-message-el');
+
+      clearTimeout(sproutTimeout);
+
+      // Reset states
+      seed.style.opacity = '0';
+      seed.style.transform = 'translateY(-16px)';
+      stem.style.transform = 'scaleY(0)';
+      flower.classList.remove('rose-bloom-anim');
+      flower.style.transform = 'scale(0)';
+      flower.style.opacity = '0';
+      message.classList.remove('opacity-100', 'translate-y-0');
+      message.classList.add('opacity-0', 'translate-y-3');
+
+      // Show container
+      overlay.classList.remove('opacity-0', 'scale-75', 'pointer-events-none');
+      overlay.classList.add('opacity-100', 'scale-100');
+
+      // Step 1: Seed drops down into soil (0ms -> 600ms)
+      setTimeout(() => {
+        seed.style.opacity = '1';
+        seed.style.transform = 'translateY(118px)';
+      }, 100);
+
+      // Step 2: Stem shoots upward (700ms -> 1700ms)
+      setTimeout(() => {
+        seed.style.opacity = '0';
+        stem.style.transform = 'scaleY(1)';
+        triggerSparkleBurst(window.innerWidth / 2, window.innerHeight / 2 + 30, 15);
+      }, 700);
+
+      // Step 3: Rose Bud unfurls into full bloom (1700ms -> 2700ms)
+      setTimeout(() => {
+        flower.classList.add('rose-bloom-anim');
+        triggerSparkleBurst(window.innerWidth / 2, window.innerHeight / 2 - 20, 25);
+      }, 1700);
+
+      // Step 4: Show "This is for you sweetheart" banner (2600ms)
+      setTimeout(() => {
+        message.classList.remove('opacity-0', 'translate-y-3');
+        message.classList.add('opacity-100', 'translate-y-0');
+        triggerSparkleBurst(window.innerWidth / 2, window.innerHeight / 2 + 80, 25);
+      }, 2600);
+
+      // Step 5: Automatically hide after 5.0 seconds
+      sproutTimeout = setTimeout(() => {
+        overlay.classList.remove('opacity-100', 'scale-100');
+        overlay.classList.add('opacity-0', 'scale-75', 'pointer-events-none');
+      }, 5000);
+    }
+
+    // 2. Watering Can Tilt & Water Drops Overlay Animation
+    let wateringTimeout = null;
+    function triggerWateringCanAnimation() {
+      const overlay = document.getElementById('watering-anim-overlay');
+      const can = document.getElementById('watering-can-el');
+      const drops = document.getElementById('watering-drops-el');
+      const sprout = document.getElementById('watered-sprout-el');
+
+      clearTimeout(wateringTimeout);
+
+      // Reset
+      can.classList.remove('water-can-anim');
+      drops.classList.remove('opacity-100');
+      drops.classList.add('opacity-0');
+      sprout.style.transform = 'scale(0.9)';
+
+      // Show container
+      overlay.classList.remove('opacity-0', 'scale-75', 'pointer-events-none');
+      overlay.classList.add('opacity-100', 'scale-100');
+
+      // Animate watering can tilting
+      setTimeout(() => {
+        can.classList.add('water-can-anim');
+      }, 50);
+
+      // Drops appear
+      setTimeout(() => {
+        drops.classList.remove('opacity-0');
+        drops.classList.add('opacity-100');
+      }, 350);
+
+      // Seedling grows and sparkles
+      setTimeout(() => {
+        sprout.style.transform = 'scale(1.35)';
+        triggerSparkleBurst(window.innerWidth / 2 - 20, window.innerHeight / 2 + 20, 18);
+      }, 900);
+
+      // Hide drops
+      setTimeout(() => {
+        drops.classList.remove('opacity-100');
+        drops.classList.add('opacity-0');
+      }, 1900);
+
+      // Fade out overlay
+      wateringTimeout = setTimeout(() => {
+        overlay.classList.remove('opacity-100', 'scale-100');
+        overlay.classList.add('opacity-0', 'scale-75', 'pointer-events-none');
+      }, 2700);
+    }
+
+    // 3. Dual Bells Jingling Overlay Animation
+    let chimesTimeout = null;
+    function triggerChimesJingleAnimation() {
+      const overlay = document.getElementById('chimes-anim-overlay');
+
+      clearTimeout(chimesTimeout);
+
+      // Show container
+      overlay.classList.remove('opacity-0', 'scale-75', 'pointer-events-none');
+      overlay.classList.add('opacity-100', 'scale-100');
+
+      triggerSparkleBurst(window.innerWidth / 2, window.innerHeight / 2, 22);
+
+      // Fade out after 2.6 seconds
+      chimesTimeout = setTimeout(() => {
+        overlay.classList.remove('opacity-100', 'scale-100');
+        overlay.classList.add('opacity-0', 'scale-75', 'pointer-events-none');
+      }, 2600);
+    }
+
+    // =========================================================================
+    // BUTTON HANDLERS WITH SPECIALIZED SOUNDS & ANIMATIONS
+    // =========================================================================
+
+    // Grand Botanical White Rose Center interaction
+    const grandRose = document.getElementById('grand-botanical-rose');
+    grandRose.addEventListener('click', (e) => {
+      const rect = grandRose.getBoundingClientRect();
+      triggerSparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 35);
+      playChimeChord([523.25, 659.25, 783.99, 1046.50]);
+      markDiscovered('grand-rose', 'you bloomed the grand white rose 🌸 sweetest bestie energy!');
+    });
+
+    // Moon interaction
+    const moon = document.getElementById('interactive-moon');
+    moon.addEventListener('click', (e) => {
+      const rect = moon.getBoundingClientRect();
+      triggerSparkleBurst(rect.left + 40, rect.top + 40, 30);
+      playChimeChord([659.25, 830.61, 987.77, 1318.51]);
+      markDiscovered('moon', "the moon says you're doing amazing 🌙✨");
+    });
+
+    // Sky Butterflies
+    ['sky-butterfly-1', 'sky-butterfly-2'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('click', (e) => {
+          triggerSparkleBurst(e.clientX, e.clientY, 20);
+          playGoldenButterflySound();
+          markDiscovered('butterfly', "the butterflies are fluttering around you 🦋✨");
+        });
+      }
+    });
+
+    // Pond lotus ripple interaction
+    const pond = document.getElementById('pond-sanctuary');
+    pond.addEventListener('click', (e) => {
+      playBubblePopSound();
+      triggerSparkleBurst(e.clientX, e.clientY, 20);
+      markDiscovered('pond-secret', "pond rippled! lotus flower is blooming 🪷");
+    });
+
+    // 1. "Water the seedling" (Sage Wildflowers pot)
+    document.getElementById('clickable-pot-1').addEventListener('click', (e) => {
+      triggerSparkleBurst(e.clientX, e.clientY, 20);
+      playWateringSound();
+      triggerWateringCanAnimation();
+      markDiscovered('pot-1', "seedling hydrated! you have green thumb aura 🌱💧");
+    });
+
+    // 2. "Chimes" (Garden Chime Shrub)
+    document.getElementById('clickable-bellshrub').addEventListener('click', (e) => {
+      triggerSparkleBurst(e.clientX, e.clientY, 25);
+      playBellsJingleSound();
+      triggerChimesJingleAnimation();
+      markDiscovered('bell-shrub', "blossom chime rang for you 🔔🌸✨");
+    });
+
+    // 3. "Poke me" & "Pop bubble" Buttons
+    const bubbleQuips = [
+      "why did you poke that 😭",
+      "bro loves poking and popping bubbles 🫧",
+      "pop! 100% chance of great things ahead 🌸",
+      "bubble popped! zero thoughts, just vibes ✨"
+    ];
+    let quipIdx = 0;
+
+    document.querySelectorAll('.garden-bubble').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const discId = btn.getAttribute('data-discovery-id');
+        triggerSparkleBurst(e.clientX, e.clientY, 24);
+
+        if (discId === 'bubble-1') {
+          // Poke me button -> Squishy poke sound
+          playPokeSound();
+        } else {
+          // Pop bubble button -> Crisp water bubble pop
+          playBubblePopSound();
+        }
+
+        const quip = bubbleQuips[quipIdx % bubbleQuips.length];
+        quipIdx++;
+        markDiscovered(discId, quip);
+
+        btn.style.transform = 'scale(0.7)';
+        setTimeout(() => {
+          btn.style.transform = '';
+        }, 250);
+      });
+    });
+
+    // 4. "Follow Golden Butterfly" Button
+    document.getElementById('rare-butterfly-btn').addEventListener('click', (e) => {
+      triggerSparkleBurst(e.clientX, e.clientY, 30);
+      playGoldenButterflySound();
+      markDiscovered('secret-butterfly', 'followed the golden butterfly to the secret arch 🦋✨');
+    });
+
+    // 5. "Plant baby sprout" Button
+    document.getElementById('plant-flower-btn').addEventListener('click', (e) => {
+      triggerSparkleBurst(e.clientX, e.clientY, 25);
+      playPlantSproutSound();
+      triggerSproutBloomAnimation();
+      showToast("planting a sweet little rose for you... 🌿🌸", "🌱");
+    });
+
+    // Photo Memory Modals
+    const memoryModal = document.getElementById('memory-modal');
+    const modalCard = document.getElementById('modal-card');
+    const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('modal-title');
+    const modalQuote = document.getElementById('modal-quote');
+    const modalTag = document.getElementById('modal-tag');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+
+    function openMemory(imageSrc, title, quote, tag, discId) {
+      modalImage.src = imageSrc;
+      modalTitle.textContent = title;
+      modalQuote.textContent = quote;
+      modalTag.textContent = tag;
+
+      memoryModal.classList.remove('opacity-0', 'pointer-events-none');
+      modalCard.classList.remove('scale-95');
+      modalCard.classList.add('scale-100');
+
+      playChimeChord([523.25, 659.25, 783.99, 987.77]);
+      markDiscovered(discId, tag.includes("01") ? "just her, making summer prettier 🌸" : "sweet candid memory 🍵✨");
+    }
+
+    function closeMemory() {
+      memoryModal.classList.add('opacity-0', 'pointer-events-none');
+      modalCard.classList.remove('scale-100');
+      modalCard.classList.add('scale-95');
+    }
+
+    closeModalBtn.addEventListener('click', closeMemory);
+    memoryModal.addEventListener('click', (e) => {
+      if (e.target === memoryModal) closeMemory();
+    });
+
+    // Polaroid 1 click
+    document.getElementById('polaroid-meadow').addEventListener('click', () => {
+      openMemory(
+        "assets/photo_1.jpg",
+        "SUMMER IN BLOOM",
+        "\"just her, making summer prettier 🌸 ordinary afternoons feel magical with you.\"",
+        "FRIENDSHIP POLAROID #01",
+        "polaroid-1"
+      );
+    });
+
+    // Polaroid 2 click
+    document.getElementById('polaroid-cafe').addEventListener('click', () => {
+      openMemory(
+        "assets/photo_2.jpg",
+        "Kumar Purnima ✨",
+        "\"okayyy, somebody understood the assignment ✨ looking absolutely stunning!\"",
+        "FESTIVE MEMORY #02",
+        "polaroid-2"
+      );
+    });
+
+    // Love memory button inside modal
+    document.getElementById('love-memory-btn').addEventListener('click', (e) => {
+      triggerSparkleBurst(e.clientX, e.clientY, 35);
+      playChimeChord([659.25, 783.99, 1046.50]);
+      showToast("bestie sparkle affection delivered! 💕", "🌸");
+    });
+
+    // Secret Sanctuary Transition & Modal
+    const secretGardenModal = document.getElementById('secret-garden-modal');
+    const closeSecretBtn = document.getElementById('close-secret-btn');
+    const secretDirectBtn = document.getElementById('secret-garden-direct-btn');
+    const sweepFx = document.getElementById('petal-sweep-fx');
+
+    function triggerSecretGateSequence() {
+      // Epic petal sweep animation
+      sweepFx.classList.remove('hidden');
+      sweepFx.classList.add('petal-sweep-active');
+
+      playChimeChord([440, 554.37, 659.25, 880, 1108.73]);
+
+      setTimeout(() => {
+        sweepFx.classList.remove('petal-sweep-active');
+        sweepFx.classList.add('hidden');
+        secretGardenModal.classList.remove('opacity-0', 'pointer-events-none');
+        triggerSparkleBurst(window.innerWidth / 2, window.innerHeight / 2, 50);
+      }, 550);
+    }
+
+    function closeSecretGarden() {
+      secretGardenModal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    secretDirectBtn.addEventListener('click', triggerSecretGateSequence);
+    closeSecretBtn.addEventListener('click', closeSecretGarden);
+    secretGardenModal.addEventListener('click', (e) => {
+      if (e.target === secretGardenModal) closeSecretGarden();
+    });
+
+    // Sparkle burst inside secret modal
+    document.getElementById('confetti-burst-btn').addEventListener('click', (e) => {
+      triggerSparkleBurst(e.clientX, e.clientY, 60);
+      playChimeChord([523.25, 659.25, 783.99, 1046.50, 1318.51]);
+      showToast("MAXIMUM BESTIE LOVE ACTIVATED 🌸💖💐", "👑");
+    });
+
+    // First gentle ambient welcome toast right away
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        showToast("A Little Garden is ready for you! 🌸 tap anything", "🌿");
+      }, 400);
+    });
+  </script>
+  <!-- END: Interactions, Overlay Animations & Modals -->
+</body>
+</html>

@@ -1,0 +1,266 @@
+/* ==========================================================================
+   A LITTLE UNIVERSE — Custom Styles & Micro-Animations
+   ========================================================================== */
+
+@layer base {
+  html, body {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: #0b1326;
+    color: #dae2fd;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: max(884px, 100dvh);
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(11, 19, 38, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(215, 186, 255, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(215, 186, 255, 0.5);
+}
+
+/* Glassmorphism & Visual Panels */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.glass-card {
+  background: rgba(19, 27, 46, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(215, 186, 255, 0.15);
+  box-shadow: 0 12px 40px rgba(6, 14, 32, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.status-chip {
+  background: rgba(215, 186, 255, 0.08);
+  border: 1px solid rgba(215, 186, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.status-chip:hover {
+  background: rgba(215, 186, 255, 0.16);
+  border-color: rgba(215, 186, 255, 0.4);
+  box-shadow: 0 0 15px rgba(215, 186, 255, 0.2);
+}
+
+/* Custom Cursor (Desktop Only) */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(215, 186, 255, 0.6);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+  mix-blend-mode: screen;
+}
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background-color: #ffd700;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px #ffd700;
+}
+.custom-cursor.active {
+  width: 44px;
+  height: 44px;
+  background-color: rgba(215, 186, 255, 0.15);
+  border-color: #ffd700;
+}
+
+@media (pointer: coarse) {
+  .custom-cursor, .custom-cursor-dot {
+    display: none !important;
+  }
+}
+
+/* 3D Object Tooltip */
+.star-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(11, 19, 38, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(215, 186, 255, 0.3);
+  padding: 6px 12px;
+  border-radius: 9999px;
+  color: #eddcff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 12px rgba(215, 186, 255, 0.2);
+  white-space: nowrap;
+  z-index: 40;
+  transform: translate(-50%, -120%);
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Toast Notifications */
+.toast-container {
+  position: fixed;
+  top: 90px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+.toast-item {
+  pointer-events: auto;
+  min-width: 280px;
+  max-width: 380px;
+  padding: 12px 16px;
+  background: rgba(19, 27, 46, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(215, 186, 255, 0.3);
+  border-radius: 12px;
+  color: #dae2fd;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(215, 186, 255, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: toastIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.toast-item.toast-out {
+  opacity: 0;
+  transform: translateX(40px) scale(0.95);
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Floating Animations */
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(var(--rot, 0deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(calc(var(--rot, 0deg) + 1.5deg));
+  }
+}
+
+@keyframes floatParticles {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-30px) scale(1.4);
+    opacity: 0.2;
+  }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 4.5s ease-in-out infinite alternate;
+}
+
+/* Shimmer Light Bar */
+.shimmer-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-20deg);
+  transition: none;
+}
+.shimmer-btn:hover::after {
+  left: 200%;
+  transition: left 0.8s ease-in-out;
+}
+
+/* Ambient Pulse Glows */
+@keyframes pulseNebula {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
+}
+.animate-nebula {
+  animation: pulseNebula 6s ease-in-out infinite;
+}
+
+/* Polaroid & Scrapbook Specific Styling */
+.polaroid-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 70px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border-left: 2px dashed rgba(255, 255, 255, 0.4);
+  border-right: 2px dashed rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Reduced Motion Overrides */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

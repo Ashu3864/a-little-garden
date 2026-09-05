@@ -1,0 +1,24 @@
+{
+  "name": "a-little-universe",
+  "version": "1.0.0",
+  "description": "An immersive 3D best-friend interactive universe experience",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve .",
+    "build": "echo 'Production static files are ready in root directory.'"
+  },
+  "keywords": [
+    "threejs",
+    "3d",
+    "interactive",
+    "best-friend",
+    "universe",
+    "creative-coding"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
